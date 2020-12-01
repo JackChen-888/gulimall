@@ -48,7 +48,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         return leveOneMenus;
     }
 
-    //递归查找所有菜单的子菜单
+    //递归查找所有菜单的子菜单,root = 当前菜单,all = 所有菜单
     private List<CategoryEntity> getChildrens(CategoryEntity root, List<CategoryEntity> all) {
         List<CategoryEntity> children = all.stream().filter(CategoryEntity -> {
             return CategoryEntity.getParentCid() == root.getCatId();
