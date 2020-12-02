@@ -48,7 +48,7 @@ public class CategoryController {
     public R info(@PathVariable("catId") Long catId) {
         CategoryEntity category = categoryService.getById(catId);
 
-        return R.ok().put("category", category);
+        return R.ok().put("data", category);
     }
 
     /**
@@ -74,14 +74,12 @@ public class CategoryController {
     /**
      * 删除
      *
-     * @RequestBody：获取请求体内容,只有post请求有请求体，get没有请求体
-     * SpringMvc自动将请求体的数据（json）转换对应的对象
+     * @RequestBody：获取请求体内容,只有post请求有请求体，get没有请求体 SpringMvc自动将请求体的数据（json）转换对应的对象
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] catIds) {
-        categoryService.removeByIds(Arrays.asList(catIds));
+        categoryService.removeMenuByIds(Arrays.asList(catIds));
 
         return R.ok();
     }
-
 }
