@@ -72,6 +72,15 @@ public class CategoryController {
     }
 
     /**
+     * 修改
+     */
+    @RequestMapping("/update/sort")
+    public R updateSort(@RequestBody CategoryEntity[] category) {
+        categoryService.updateBatchById(Arrays.asList(category));
+        return R.ok();
+    }
+
+    /**
      * 删除
      *
      * @RequestBody：获取请求体内容,只有post请求有请求体，get没有请求体 SpringMvc自动将请求体的数据（json）转换对应的对象
