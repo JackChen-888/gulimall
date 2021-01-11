@@ -62,6 +62,9 @@ public class CategoryEntity implements Serializable {
      */
     private Integer productCount;
 
+    /**
+     * 存放菜单的子分类数据
+     */
     @TableField(exist = false)
     private List<CategoryEntity> children;
 }
