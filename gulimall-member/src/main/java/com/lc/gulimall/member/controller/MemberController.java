@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 会员
  *
- * @author leifengyang
- * @email leifengyang@gmail.com
+ * @author liuchen
+ * @email liuchen525@126.com
  * @date 2019-10-08 09:47:05
  */
 @RestController
