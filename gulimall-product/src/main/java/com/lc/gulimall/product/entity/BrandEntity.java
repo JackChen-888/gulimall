@@ -5,6 +5,10 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
 
+import com.lc.common.valid.AddGroup;
+import com.lc.common.valid.ListValue;
+import com.lc.common.valid.UpdateGroup;
+import com.lc.common.valid.UpdateStatusGroup;
 import lombok.Data;
 import org.hibernate.validator.constraints.URL;
 
@@ -25,19 +29,20 @@ public class BrandEntity implements Serializable {
     /**
      * 品牌id
      */
+    @Null(message = "新增不能指定id", groups = {AddGroup.class})
+    @NotNull(message = "修改必须指定id", groups = {UpdateGroup.class})
     @TableId
     private Long brandId;
     /**
      * 品牌名
      */
-    @NotEmpty
-    @NotBlank(message = "品牌名必须提交")
+    @NotBlank(message = "品牌名必须提交", groups = {AddGroup.class, UpdateGroup.class})
     private String name;
     /**
      * 品牌logo地址
      */
-    @NotEmpty
-    @URL(message = "品牌logo地址不合法")
+    @NotBlank(groups = {AddGroup.class})
+    @URL(message = "品牌logo地址不合法", groups = {AddGroup.class, UpdateGroup.class})
     private String logo;
     /**
      * 介绍
@@ -46,17 +51,19 @@ public class BrandEntity implements Serializable {
     /**
      * 显示状态[0-不显示；1-显示]
      */
+    @NotNull(groups = {AddGroup.class, UpdateStatusGroup.class})
+    @ListValue(valus = {0, 1}, groups = {AddGroup.class, UpdateStatusGroup.class})
     private Integer showStatus;
     /**
      * 检索首字母
      */
-    @NotEmpty
-    @Pattern(regexp = "/^[a-zA-Z]$/", message = "检索首字母必须为一个数字")
+    @NotEmpty(groups = {AddGroup.class})
+    @Pattern(regexp = "^[a-zA-Z]$", message = "检索首字母必须为一个数字", groups = {AddGroup.class, UpdateGroup.class})
     private String firstLetter;
     /**
      * 排序
      */
-    @NotNull
-    @Min(value = 0, message = "排序必须大于等于0")
+    @NotNull(groups = {AddGroup.class})
+    @Min(value = 0, message = "排序必须大于等于0", groups = {AddGroup.class, UpdateGroup.class})
     private Integer sort;
 }
