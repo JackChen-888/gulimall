@@ -4,9 +4,7 @@ import com.lc.common.constant.ProductConstant;
 import com.lc.gulimall.product.dao.AttrAttrgroupRelationDao;
 import com.lc.gulimall.product.dao.AttrGroupDao;
 import com.lc.gulimall.product.dao.CategoryDao;
-import com.lc.gulimall.product.entity.AttrAttrgroupRelationEntity;
-import com.lc.gulimall.product.entity.AttrGroupEntity;
-import com.lc.gulimall.product.entity.CategoryEntity;
+import com.lc.gulimall.product.entity.*;
 import com.lc.gulimall.product.service.CategoryService;
 import com.lc.gulimall.product.vo.AttrGroupRelationVo;
 import com.lc.gulimall.product.vo.AttrRespVo;
@@ -28,7 +26,6 @@ import com.lc.common.utils.PageUtils;
 import com.lc.common.utils.Query;
 
 import com.lc.gulimall.product.dao.AttrDao;
-import com.lc.gulimall.product.entity.AttrEntity;
 import com.lc.gulimall.product.service.AttrService;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -217,5 +214,25 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
         IPage<AttrEntity> page = this.page(new Query<AttrEntity>().getPage(params), wrapper);
         PageUtils pageUtils = new PageUtils(page);
         return pageUtils;
+    }
+
+    /**
+     * 根据分组id查找关联的所有基本属性
+     * @param attrgroupId
+     * @return
+     */
+    @Override
+    public List<AttrEntity> getRelationAttr(Long attrgroupId) {
+        List<AttrAttrgroupRelationEntity> entities = relationDao.selectList(new QueryWrapper<AttrAttrgroupRelationEntity>().eq("attr_group_id", attrgroupId));
+
+        List<Long> attrIds = entities.stream().map((attr) -> {
+            return attr.getAttrId();
+        }).collect(Collectors.toList());
+
+        if(attrIds == null || attrIds.size() == 0){
+            return null;
+        }
+        Collection<AttrEntity> attrEntities = this.listByIds(attrIds);
+        return (List<AttrEntity>) attrEntities;
     }
 }

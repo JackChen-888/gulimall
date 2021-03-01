@@ -80,5 +80,4 @@ public class MemberLevelController {
 
         return R.ok();
     }
-
 }
