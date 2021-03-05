@@ -11,7 +11,6 @@ import com.lc.gulimall.product.vo.AttrVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.lc.gulimall.product.entity.AttrEntity;
 import com.lc.gulimall.product.service.AttrService;
 import com.lc.common.utils.PageUtils;
 import com.lc.common.utils.R;
