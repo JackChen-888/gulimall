@@ -34,9 +34,9 @@ import java.util.Map;
 @RequestMapping("/app")
 @Api("APP登录接口")
 public class AppLoginController {
-    @Autowired
+    @Resource
     private UserService userService;
-    @Autowired
+    @Resource
     private JwtUtils jwtUtils;
 
     /**

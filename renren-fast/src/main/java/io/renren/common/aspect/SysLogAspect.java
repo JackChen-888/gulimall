@@ -37,7 +37,7 @@ import java.util.Date;
 @Aspect
 @Component
 public class SysLogAspect {
-	@Autowired
+	@Resource
 	private SysLogService sysLogService;
 	
 	@Pointcut("@annotation(io.renren.common.annotation.SysLog)")

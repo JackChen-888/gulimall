@@ -34,7 +34,7 @@ import java.util.zip.ZipOutputStream;
  */
 @Service
 public class SysGeneratorService {
-    @Autowired
+    @Resource
     private GeneratorDao generatorDao;
 
 

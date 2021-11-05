@@ -31,7 +31,7 @@ public class MongoDBCollectionFactory {
 
     // 此处是为了兼容mongo相关内容和关系型数据库的静态耦合所导致的问题
 
-    @Autowired
+    @Resource
     private MongoDatabase database;
     @PostConstruct
     public void initMongoDatabase(){

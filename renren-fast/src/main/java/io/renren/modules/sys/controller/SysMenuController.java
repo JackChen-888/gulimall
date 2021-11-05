@@ -33,9 +33,9 @@ import java.util.Set;
 @RestController
 @RequestMapping("/sys/menu")
 public class SysMenuController extends AbstractController {
-	@Autowired
+	@Resource
 	private SysMenuService sysMenuService;
-	@Autowired
+	@Resource
 	private ShiroService shiroService;
 
 	/**

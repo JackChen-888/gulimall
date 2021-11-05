@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class SysConfigRedis {
-    @Autowired
+    @Resource
     private RedisUtils redisUtils;
 
     public void saveOrUpdate(SysConfigEntity config) {

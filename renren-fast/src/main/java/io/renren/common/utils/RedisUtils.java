@@ -22,17 +22,17 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 public class RedisUtils {
-    @Autowired
+    @Resource
     private RedisTemplate<String, Object> redisTemplate;
-    @Autowired
+    @Resource
     private ValueOperations<String, String> valueOperations;
-    @Autowired
+    @Resource
     private HashOperations<String, String, Object> hashOperations;
-    @Autowired
+    @Resource
     private ListOperations<String, Object> listOperations;
-    @Autowired
+    @Resource
     private SetOperations<String, Object> setOperations;
-    @Autowired
+    @Resource
     private ZSetOperations<String, Object> zSetOperations;
     /**  默认过期时长，单位：秒 */
     public final static long DEFAULT_EXPIRE = 60 * 60 * 24;

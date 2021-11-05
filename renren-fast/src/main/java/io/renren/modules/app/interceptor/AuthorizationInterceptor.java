@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Component
 public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
-    @Autowired
+    @Resource
     private JwtUtils jwtUtils;
 
     public static final String USER_KEY = "userId";

@@ -34,7 +34,7 @@ import java.util.Date;
 @RequestMapping("/app")
 @Api("APP注册接口")
 public class AppRegisterController {
-    @Autowired
+    @Resource
     private UserService userService;
 
     @PostMapping("register")

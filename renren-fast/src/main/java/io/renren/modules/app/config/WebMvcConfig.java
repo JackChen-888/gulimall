@@ -25,9 +25,9 @@ import java.util.List;
  */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-    @Autowired
+    @Resource
     private AuthorizationInterceptor authorizationInterceptor;
-    @Autowired
+    @Resource
     private LoginUserHandlerMethodArgumentResolver loginUserHandlerMethodArgumentResolver;
 
     @Override

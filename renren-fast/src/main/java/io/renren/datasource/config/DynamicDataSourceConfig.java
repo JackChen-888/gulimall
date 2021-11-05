@@ -28,7 +28,7 @@ import java.util.Map;
 @Configuration
 @EnableConfigurationProperties(DynamicDataSourceProperties.class)
 public class DynamicDataSourceConfig {
-    @Autowired
+    @Resource
     private DynamicDataSourceProperties properties;
 
     @Bean
