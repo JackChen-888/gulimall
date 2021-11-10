@@ -4,11 +4,15 @@ import com.guigu.common.utils.PageUtils;
 import com.guigu.common.utils.R;
 import com.gulimall.coupon.entity.CouponEntity;
 import com.gulimall.coupon.service.CouponService;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * 优惠券信息
@@ -17,11 +21,18 @@ import java.util.Map;
  * @email liuchen3698@gmail.com
  * @date 2021-11-05 10:23:50
  */
+@RefreshScope
 @RestController
 @RequestMapping("coupon/coupon")
 public class CouponController {
     @Resource
     private CouponService couponService;
+
+    @Value("${coupon.user.name}")
+    private String name;
+
+    @Value("${coupon.user.age}")
+    private Integer age;
 
     /**
      * 列表
@@ -74,4 +85,15 @@ public class CouponController {
         return R.ok();
     }
 
+    @RequestMapping("/member/list")
+    public R memberCoupons() {
+        CouponEntity couponEntity = new CouponEntity();
+        couponEntity.setCouponName("满100减10");
+        return R.ok().put("coupons", Collections.singletonList(couponEntity));
+    }
+
+    @RequestMapping("/test")
+    public R test() {
+        return Objects.requireNonNull(R.ok().put("name", name)).put("age", age);
+    }
 }

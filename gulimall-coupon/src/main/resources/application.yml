@@ -7,11 +7,11 @@ spring:
     username: root
     password: root
   application:
-    name: gulimall-product
-#  cloud:
-#    nacos:
-#      config:
-#        server-addr: 127.0.0.1:8848
+    name: gulimall-coupon
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
 #    alicloud:
 #      access-key: LTAI4GJZ17zhe3GqF5dYAZ6K
 #      secret-key: Ww2uK7ElCNM6JJIg6OlKUEKXQW6i2d
@@ -24,8 +24,10 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: auto
-#server:
-#  port: 12000
 #logging:
 #  level:
 #    com.lc.gulimall: debug
+coupon.user.name:
+  zhangsan
+coupon.user.age:
+  23

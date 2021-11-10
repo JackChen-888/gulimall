@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "coupon.user.name",
+      "type": "java.lang.String",
+      "description": "Description for coupon.user.name."
+  }
+] }
