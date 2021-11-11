@@ -24,10 +24,10 @@ import io.renren.modules.oss.entity.SysOssEntity;
 import io.renren.modules.oss.service.SysOssService;
 import io.renren.modules.sys.service.SysConfigService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
