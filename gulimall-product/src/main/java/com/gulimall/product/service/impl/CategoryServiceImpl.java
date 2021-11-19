@@ -7,9 +7,12 @@ import com.guigu.common.utils.PageUtils;
 import com.guigu.common.utils.Query;
 import com.gulimall.product.dao.CategoryDao;
 import com.gulimall.product.entity.CategoryEntity;
+import com.gulimall.product.service.CategoryBrandRelationService;
 import com.gulimall.product.service.CategoryService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +23,9 @@ import java.util.stream.Collectors;
  */
 @Service("categoryService")
 public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity> implements CategoryService {
+
+    @Resource
+    CategoryBrandRelationService categoryBrandRelationService;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -43,6 +49,18 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         return entities.stream().filter(categoryEntity -> categoryEntity.getParentCid() == 0)
                 .peek((menu) -> menu.setChildren(getChildrens(menu, entities))).sorted(Comparator.comparingInt(CategoryEntity :: getSort))
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    @Override
+    public void updateCascade(CategoryEntity category) {
+        this.updateById(category);
+        categoryBrandRelationService.updateCategory(category.getCatId(), category.getName());
+    }
+
+    @Override
+    public void removeMenuByIds(List<Long[]> singletonList) {
+        baseMapper.deleteBatchIds(singletonList);
     }
 
     /**

@@ -3,10 +3,14 @@ package com.gulimall.product.controller;
 import com.guigu.common.utils.R;
 import com.gulimall.product.entity.CategoryEntity;
 import com.gulimall.product.service.CategoryService;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -24,12 +28,13 @@ public class CategoryController {
     private CategoryService categoryService;
 
     /**
-     * 查出所有分类以及子分类,树形结构
+     * 查询所有分类以及子分类，以树形结构组装
      */
     @RequestMapping("/list/tree")
     public R list() {
-        List<CategoryEntity> entityList = categoryService.listWithTree();
-        return R.ok().put("page", entityList);
+        List<CategoryEntity> entities = categoryService.listWithTree();
+
+        return R.ok().put("data", entities);
     }
 
 
@@ -40,7 +45,7 @@ public class CategoryController {
     public R info(@PathVariable("catId") Long catId) {
         CategoryEntity category = categoryService.getById(catId);
 
-        return R.ok().put("category", category);
+        return R.ok().put("data", category);
     }
 
     /**
@@ -58,19 +63,30 @@ public class CategoryController {
      */
     @RequestMapping("/update")
     public R update(@RequestBody CategoryEntity category) {
-        categoryService.updateById(category);
+        categoryService.updateCascade(category);
 
         return R.ok();
     }
 
     /**
-     * 删除
+     * 修改
      */
-    @RequestMapping("/delete")
-    public R delete(@RequestBody Long[] catIds) {
-        categoryService.removeByIds(Arrays.asList(catIds));
-
+    @RequestMapping("/update/sort")
+    public R updateSort(@RequestBody CategoryEntity[] category) {
+        categoryService.updateBatchById(Arrays.asList(category));
         return R.ok();
     }
 
+    /**
+     * 删除
+     *
+     * @RequestBody：获取请求体内容,只有post请求有请求体，get没有请求体 SpringMvc自动将请求体的数据（json）转换对应的对象
+     */
+    @RequestMapping("/delete")
+    public R delete(@RequestBody Long[] catIds) {
+        //检查当前被删除的菜单是否还被引用
+        categoryService.removeMenuByIds(Collections.singletonList(catIds));
+
+        return R.ok();
+    }
 }

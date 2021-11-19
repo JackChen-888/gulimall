@@ -30,5 +30,19 @@ public interface CategoryService extends IService<CategoryEntity> {
      * @return /
      */
     List<CategoryEntity> listWithTree();
+
+    /**
+     * 修改
+     *
+     * @param category /
+     */
+    void updateCascade(CategoryEntity category);
+
+    /**
+     * 删除
+     *
+     * @param singletonList /
+     */
+    void removeMenuByIds(List<Long[]> singletonList);
 }
 
